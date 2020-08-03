@@ -214,10 +214,10 @@ export default class TableWithDrag extends Component {
       <React.Fragment>
         
       <div className="row mb-50">
-         <div className="col-sm-4"></div>
-         <input type="text" placeholder="Search in Todos with title.."  
+         <div className="col-sm-3"></div>
+         <input type="text" placeholder="Search in Todos with any column.."  
            onChange={(e) => this.setState({searchKey: e.target.value})}
-         className="form-control col-sm-3"/>
+         className="form-control col-sm-4"/>
           &nbsp;
          <button className="btn btn-info btn-sm col-sm-2" onClick={this.handleSearch}>
             Search

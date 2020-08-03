@@ -13,7 +13,7 @@ const Header = () => (
         <ul className="navbar-nav mr-auto">
         </ul>
         <form className="form-inline my-2 my-lg-0">
-          some
+          <i className="fa fa-user"></i>
         </form>
     </div>
   </nav>
