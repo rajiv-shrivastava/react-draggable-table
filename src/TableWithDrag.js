@@ -194,7 +194,7 @@ export default class TableWithDrag extends Component {
                   onChange={this.handleAddTodoValue} 
                   name="dueDate" 
                   className="form-control" 
-                  type="text" 
+                  type="number" 
                   placeholder="Due Date" />
                 </td>
                 <td>
