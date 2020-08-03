@@ -58,52 +58,7 @@ const SortableItem = sortableElement(({title,owner,status,dueDate,priority}) => 
   </React.Fragment>
 ));
 
-const AddTodoForm = sortableElement(({title,owner,status,dueDate,priority}) => (
-  <React.Fragment>
-    <tr>
-      <td> 
-         <input 
-            onChange={this.handleAddTodoValue} 
-            name="title"
-            className="form-control" 
-            type="text" 
-            placeholder="things to do"/>
-        </td>
-        <td>
-         <input 
-           onChange={this.handleAddTodoValue} 
-           name="owner"
-           className="form-control" 
-           type="text" 
-           placeholder="owner" />
-        </td>
-        <td>
-        <select class="custom-select" id="inputGroupSelect01">
-            <option selected>Choose status...</option>
-            <option value="1">Pending</option>
-            <option value="2">Done</option>
-            <option value="3">In Progress</option>
-          </select>
-        </td>
-        <td>
-        <input 
-           onChange={this.handleAddTodoValue} 
-           name="dueDate" 
-           className="form-control" 
-           type="text" 
-           placeholder="Due Date" />
-        </td>
-        <td>
-        <input 
-          onChange={this.handleAddTodoValue} 
-          name="priority"
-          className="form-control" 
-          type="text" 
-          placeholder="Priority" />
-        </td>
-    </tr>
-  </React.Fragment>
-));
+
 
 export default class TableWithDrag extends Component {
   constructor(props){
@@ -142,6 +97,7 @@ export default class TableWithDrag extends Component {
     let addTodoValueNew = this.state.addTodoValue
     addTodoValueNew[`${name}`] =  value
     this.setState({addTodoValue: addTodoValueNew  })
+    console.log('this.state',this.state)
   }
 
   saveTodo = () => {
@@ -160,15 +116,63 @@ export default class TableWithDrag extends Component {
       }})
   }
 
+
   render() {
     const {todos,showSave} = this.state;
+
+    const AddTodoForm = 
+          <React.Fragment>
+            <tr>
+              <td> 
+                <input 
+                    onChange={this.handleAddTodoValue} 
+                    name="title"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="things to do"/>
+                </td>
+                <td>
+                <input 
+                  onChange={this.handleAddTodoValue} 
+                  name="owner"
+                  className="form-control" 
+                  type="text" 
+                  placeholder="owner" />
+                </td>
+                <td>
+                <select className="custom-select" id="inputGroupSelect01" value="">
+                    <option value="">Choose status...</option>
+                    <option value="1">Pending</option>
+                    <option value="2">Done</option>
+                    <option value="3">In Progress</option>
+                  </select>
+                </td>
+                <td>
+                <input 
+                  onChange={this.handleAddTodoValue} 
+                  name="dueDate" 
+                  className="form-control" 
+                  type="text" 
+                  placeholder="Due Date" />
+                </td>
+                <td>
+                <input 
+                  onChange={this.handleAddTodoValue} 
+                  name="priority"
+                  className="form-control" 
+                  type="text" 
+                  placeholder="Priority" />
+                </td>
+            </tr>
+          </React.Fragment>
+
 
     return (
       <React.Fragment>
       <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
         {todos.map((todo, index) => (
           todo.title == 'newTodo'  ? 
-            <AddTodoForm />
+             AddTodoForm
              :
             <SortableItem 
               key={`item-${todo.title}`} 
