@@ -1,23 +1,21 @@
 import React,{Component} from "react";
-
 import {
   sortableContainer,
   sortableElement,
   sortableHandle,
 } from 'react-sortable-hoc';
-
 import arrayMove from 'array-move';
+import './assets/css/style.css'
 
-const DragHandle = sortableHandle(() => <span>Move</span>);
+const DragHandle = sortableHandle(() => <span className="dragItem"></span>);
 
 const SortableItem = sortableElement(({value}) => (
   <React.Fragment>
     <tr>
       <td> 
-        {value}
+        <DragHandle /> {value}
         </td>
-        <td>
-         <DragHandle />
+        <td>         
       </td>
     </tr>
   </React.Fragment>
@@ -25,6 +23,16 @@ const SortableItem = sortableElement(({value}) => (
 
 const SortableContainer = sortableContainer(({children}) => {
   return <table className="table">
+    <thead>
+       <tr>
+      <th>
+        Things To Do
+      </th>
+      <th>
+        Two
+      </th>
+      </tr>
+    </thead>
     <tbody>
         {children}
       </tbody>
@@ -32,16 +40,19 @@ const SortableContainer = sortableContainer(({children}) => {
 });
 
 export default class TableWithDrag extends Component {
-  state = {
-    todos: [
-      'Item 1', 
-      'Item 2', 
-      'Item 3', 
-      'Item 4', 
-      'Item 5', 
-      'Item 6'
-    ],
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      todos: [
+        {title: 'Item 1'}, 
+        {title: 'Item 2'}, 
+        {title: 'Item 3'}, 
+        {title: 'Item 4'}, 
+        {title: 'Item 5'}, 
+        {title: 'Item 6'}
+      ]
+    }
+  }
 
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState(({todos}) => ({
@@ -54,9 +65,8 @@ export default class TableWithDrag extends Component {
 
     return (
       <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
-        {todos.map((value, index) => (
-          <SortableItem key={`item-${value}`} index={index} value={value} >             
-          </SortableItem>
+        {todos.map((todo, index) => (
+          <SortableItem key={`item-${todo.title}`} index={index} value={todo.title} />            
         ))}
       </SortableContainer>
     );
