@@ -19,6 +19,15 @@ const SortableContainer = sortableContainer(({children}) => {
       <th>
         Owner
       </th>
+      <th>
+        Status
+      </th>
+      <th>
+        Due Date
+      </th>
+      <th>
+        Priority
+      </th>
       </tr>
     </thead>
     <tbody>
@@ -27,7 +36,7 @@ const SortableContainer = sortableContainer(({children}) => {
     </table>;
 });
 
-const SortableItem = sortableElement(({title,owner,status,dueDate}) => (
+const SortableItem = sortableElement(({title,owner,status,dueDate,priority}) => (
   <React.Fragment>
     <tr>
       <td> 
@@ -42,6 +51,9 @@ const SortableItem = sortableElement(({title,owner,status,dueDate}) => (
         <td>
           {dueDate}         
         </td>
+        <td>
+          {priority}         
+        </td>
     </tr>
   </React.Fragment>
 ));
@@ -51,8 +63,8 @@ export default class TableWithDrag extends Component {
     super(props)
     this.state = {
       todos: [
-        {title: 'Item 1',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020'}, 
-        {title: 'Item 2',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020'}
+        {title: 'Item 1',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}, 
+        {title: 'Item 2',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}
       ]
     }
   }
@@ -76,6 +88,7 @@ export default class TableWithDrag extends Component {
             owner={todo.owner}
             status={todo.status}
             dueDate={todo.dueDate}
+            priority={todo.priority}
             />            
         ))}
       </SortableContainer>
