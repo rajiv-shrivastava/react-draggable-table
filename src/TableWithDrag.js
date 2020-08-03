@@ -109,7 +109,7 @@ export default class TableWithDrag extends Component {
   saveTodo = () => {
     let allTodos = this.state.todos
      allTodos = allTodos.slice(0,this.state.todos.length - 1)
-     allTodos.push({title: 'Item 20',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'})
+     allTodos.push(this.state.addTodoValue)
      this.setState({
        todos: allTodos,
        showSave: false,
