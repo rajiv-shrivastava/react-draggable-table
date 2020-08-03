@@ -62,19 +62,24 @@ const AddTodoForm = sortableElement(({title,owner,status,dueDate,priority}) => (
   <React.Fragment>
     <tr>
       <td> 
-         <input type="text" placeholder="things to do"/>
+         <input className="form-control" type="text" placeholder="things to do"/>
         </td>
         <td>
-        <input type="text" placeholder="owner" />
+        <input className="form-control" type="text" placeholder="owner" />
         </td>
         <td>
-        <input type="text" placeholder="status" />
+        <select class="custom-select" id="inputGroupSelect01">
+            <option selected>Choose status...</option>
+            <option value="1">Pending</option>
+            <option value="2">Done</option>
+            <option value="3">In Progress</option>
+          </select>
         </td>
         <td>
-        <input type="text" placeholder="Due Date" />
+        <input className="form-control" type="text" placeholder="Due Date" />
         </td>
         <td>
-        <input type="text" placeholder="Priority" />
+        <input className="form-control" type="text" placeholder="Priority" />
         </td>
     </tr>
   </React.Fragment>
@@ -87,7 +92,8 @@ export default class TableWithDrag extends Component {
       todos: [
         {title: 'Item 1',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}, 
         {title: 'Item 2',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}
-      ]
+      ],
+      showSave: false
     }
   }
 
@@ -100,18 +106,18 @@ export default class TableWithDrag extends Component {
   addTodo = () => {
     let allTodos = this.state.todos
      allTodos.push({title: 'newTodo'})
-     this.setState({todos: allTodos})
+     this.setState({todos: allTodos,showSave: true})
   }
 
   saveTodo = () => {
     let allTodos = this.state.todos
      allTodos = allTodos.slice(0,this.state.todos.length - 1)
      allTodos.push({title: 'Item 20',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'})
-     this.setState({todos: allTodos})
+     this.setState({todos: allTodos,showSave: false})
   }
 
   render() {
-    const {todos} = this.state;
+    const {todos,showSave} = this.state;
 
     return (
       <React.Fragment>
@@ -133,7 +139,12 @@ export default class TableWithDrag extends Component {
       </SortableContainer>
       <button className="btn btn-info btn-sm" onClick={this.addTodo}>+ Add new </button>
         &nbsp;
-      <button type="button" className="btn btn-outline-secondary btn-sm" onClick={this.saveTodo}>Save</button> 
+      {showSave && 
+        <button type="button" className="btn btn-outline-secondary btn-sm" 
+          onClick={this.saveTodo}>
+            Save
+            </button>
+       } 
       </React.Fragment>
 
     );
