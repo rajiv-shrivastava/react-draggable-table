@@ -195,11 +195,13 @@ export default class TableWithDrag extends Component {
       <React.Fragment>
         
       <div className="row mb-50">
-         <div className="col-sm-7"></div>
+         <div className="col-sm-5"></div>
          <input type="text" placeholder="Search in Todos.."  
          className="form-control col-sm-2"/>
           &nbsp;
          <button className="btn btn-info btn-sm col-sm-2">Search</button>
+         &nbsp;
+         <button className="btn btn-warning btn-sm col-sm-2">Reset</button>
       </div>
 
       <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
