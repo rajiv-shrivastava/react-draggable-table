@@ -58,6 +58,28 @@ const SortableItem = sortableElement(({title,owner,status,dueDate,priority}) => 
   </React.Fragment>
 ));
 
+const AddTodoForm = sortableElement(({title,owner,status,dueDate,priority}) => (
+  <React.Fragment>
+    <tr>
+      <td> 
+         <input type="text" placeholder="things to do"/>
+        </td>
+        <td>
+        <input type="text" placeholder="owner" />
+        </td>
+        <td>
+        <input type="text" placeholder="status" />
+        </td>
+        <td>
+        <input type="text" placeholder="Due Date" />
+        </td>
+        <td>
+        <input type="text" placeholder="Priority" />
+        </td>
+    </tr>
+  </React.Fragment>
+));
+
 export default class TableWithDrag extends Component {
   constructor(props){
     super(props)
@@ -75,23 +97,45 @@ export default class TableWithDrag extends Component {
     }));
   };
 
+  addTodo = () => {
+    let allTodos = this.state.todos
+     allTodos.push({title: 'newTodo'})
+     this.setState({todos: allTodos})
+  }
+
+  saveTodo = () => {
+    let allTodos = this.state.todos
+     allTodos = allTodos.slice(0,this.state.todos.length - 1)
+     allTodos.push({title: 'Item 20',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'})
+     this.setState({todos: allTodos})
+  }
+
   render() {
     const {todos} = this.state;
 
     return (
+      <React.Fragment>
       <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
         {todos.map((todo, index) => (
-          <SortableItem 
-            key={`item-${todo.title}`} 
-            index={index} 
-            title={todo.title} 
-            owner={todo.owner}
-            status={todo.status}
-            dueDate={todo.dueDate}
-            priority={todo.priority}
-            />            
+          todo.title == 'newTodo'  ? 
+            <AddTodoForm />
+             :
+            <SortableItem 
+              key={`item-${todo.title}`} 
+              index={index} 
+              title={todo.title} 
+              owner={todo.owner}
+              status={todo.status}
+              dueDate={todo.dueDate}
+              priority={todo.priority}
+              />            
         ))}
       </SortableContainer>
+      <button className="btn btn-info btn-sm" onClick={this.addTodo}>+ Add new </button>
+        &nbsp;
+      <button type="button" className="btn btn-outline-secondary btn-sm" onClick={this.saveTodo}>Save</button> 
+      </React.Fragment>
+
     );
   }
 }
