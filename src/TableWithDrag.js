@@ -131,6 +131,14 @@ export default class TableWithDrag extends Component {
      }})
   }
 
+ search = (nameKey, myArray) => {
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].name === nameKey) {
+            return myArray[i];
+        }
+    }
+}
+
 
   render() {
     const {todos,showSave} = this.state;
@@ -185,6 +193,15 @@ export default class TableWithDrag extends Component {
 
     return (
       <React.Fragment>
+        
+      <div className="row mb-50">
+         <div className="col-sm-7"></div>
+         <input type="text" placeholder="Search in Todos.."  
+         className="form-control col-sm-2"/>
+          &nbsp;
+         <button className="btn btn-info btn-sm col-sm-2">Search</button>
+      </div>
+
       <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
         {todos.map((todo, index) => (
           todo.title == 'newTodo'  ? 

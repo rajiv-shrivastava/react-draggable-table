@@ -13,8 +13,7 @@ const Header = () => (
         <ul className="navbar-nav mr-auto">
         </ul>
         <form className="form-inline my-2 my-lg-0">
-        <input className="form-control mr-sm-2" type="search" placeholder="enter key to search" aria-label="Search" />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          some
         </form>
     </div>
   </nav>
