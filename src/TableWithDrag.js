@@ -140,11 +140,11 @@ export default class TableWithDrag extends Component {
                   placeholder="owner" />
                 </td>
                 <td>
-                <select className="custom-select" id="inputGroupSelect01" value="">
+                <select className="custom-select" name="status" value="" onChange={this.handleAddTodoValue}>
                     <option value="">Choose status...</option>
-                    <option value="1">Pending</option>
-                    <option value="2">Done</option>
-                    <option value="3">In Progress</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Donw">Done</option>
+                    <option value="In Progress">In Progress</option>
                   </select>
                 </td>
                 <td>
@@ -156,12 +156,13 @@ export default class TableWithDrag extends Component {
                   placeholder="Due Date" />
                 </td>
                 <td>
-                <input 
-                  onChange={this.handleAddTodoValue} 
-                  name="priority"
-                  className="form-control" 
-                  type="text" 
-                  placeholder="Priority" />
+                  <select className="custom-select" name="priority" value="" onChange={this.handleAddTodoValue}>
+                    <option value="">Choose priority...</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="High">High</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                  </select>
                 </td>
             </tr>
           </React.Fragment>
