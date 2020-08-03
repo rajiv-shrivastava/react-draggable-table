@@ -160,7 +160,7 @@ export default class TableWithDrag extends Component {
 
 
   render() {
-    const {todos,showSave} = this.state;
+    const {todos,showSave,addTodoValue} = this.state;
 
     const AddTodoForm = 
           <React.Fragment>
@@ -182,7 +182,7 @@ export default class TableWithDrag extends Component {
                   placeholder="owner" />
                 </td>
                 <td>
-                <select className="custom-select" name="status" value="" onChange={this.handleAddTodoValue}>
+                <select className="custom-select" name="status" defaultValue={addTodoValue['status']} onChange={this.handleAddTodoValue}>
                     <option value="">Choose status</option>
                     <option value="Pending">Pending</option>
                     <option value="Donw">Done</option>
@@ -198,7 +198,7 @@ export default class TableWithDrag extends Component {
                   placeholder="Due Date" />
                 </td>
                 <td>
-                  <select className="custom-select" name="priority" value="" onChange={this.handleAddTodoValue}>
+                  <select className="custom-select" name="priority" defaultValue={addTodoValue['priority']} onChange={this.handleAddTodoValue}>
                     <option value="">Choose priority</option>
                     <option value="Urgent">Urgent</option>
                     <option value="High">High</option>
