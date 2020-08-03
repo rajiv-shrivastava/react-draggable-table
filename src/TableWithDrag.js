@@ -68,6 +68,11 @@ export default class TableWithDrag extends Component {
         {title: 'Item 1',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}, 
         {title: 'Item 2',owner: 'beyond',status: 'Urgent',dueDate: '12.08.2020',priority: 'Urgent'}
       ],
+      lastTodos: 
+      [
+        {title: 'Item 1',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}, 
+        {title: 'Item 2',owner: 'beyond',status: 'Urgent',dueDate: '12.08.2020',priority: 'Urgent'}
+      ],
       searchKey: '',
       showSave: false,
       addTodoValue: {
@@ -135,20 +140,23 @@ export default class TableWithDrag extends Component {
   handleSearch = () => {
    let {searchKey,todos} = this.state
    let searchArr = []
-   if(searchKey.length > 0 ){
-    for (var i=0; i < todos.length; i++) {
-        if (todos[i].title === searchKey) {
-          searchArr.push(todos[i])
+   todos.map(tod => {
+          for(let key in tod){
+            if(tod[key].toLowerCase().includes(searchKey)){
+              searchArr.push(tod)
+            }
         }
-    }
-    this.setState({
-      todos: searchArr
-    })
-    console.log('2223',searchArr)
-
-
+      }
+     ) 
+   searchArr.length > 0 ? this.setState({lastTodos: todos,todos: searchArr}) : ''
   }
-}
+
+  handleReset = () => {
+    this.setState({
+      todos: this.state.lastTodos
+    })
+  }
+
 
 
   render() {
@@ -215,7 +223,7 @@ export default class TableWithDrag extends Component {
             Search
             </button>
          &nbsp;
-         <button className="btn btn-warning btn-sm col-sm-2">Reset</button>
+         <button className="btn btn-warning btn-sm col-sm-2" onClick={this.handleReset}>Reset</button>
       </div>
 
       <SortableContainer onSortEnd={this.onSortEnd} useDragHandle>
