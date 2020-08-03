@@ -7,7 +7,7 @@ export default class App extends React.Component {
     return (
       <div className="container-fluid">
         <Header />     
-        <div className="offset-1 col-10"> 
+        <div className="offset-1 col-10 mt-50"> 
         <TableWithDrag />
         </div>
         </div>
