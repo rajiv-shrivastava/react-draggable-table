@@ -8,19 +8,23 @@ import {
 
 import arrayMove from 'array-move';
 
-const DragHandle = sortableHandle(() => <span>::</span>);
+const DragHandle = sortableHandle(() => <span>Move</span>);
 
 const SortableItem = sortableElement(({value}) => (
   <React.Fragment>
     <tr>
-    <DragHandle />
-    {value}
+      <td> 
+        {value}
+        </td>
+        <td>
+         <DragHandle />
+      </td>
     </tr>
   </React.Fragment>
 ));
 
 const SortableContainer = sortableContainer(({children}) => {
-  return <table>
+  return <table className="table">
     <tbody>
         {children}
       </tbody>
@@ -29,7 +33,14 @@ const SortableContainer = sortableContainer(({children}) => {
 
 export default class TableWithDrag extends Component {
   state = {
-    todos: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'],
+    todos: [
+      'Item 1', 
+      'Item 2', 
+      'Item 3', 
+      'Item 4', 
+      'Item 5', 
+      'Item 6'
+    ],
   };
 
   onSortEnd = ({oldIndex, newIndex}) => {
