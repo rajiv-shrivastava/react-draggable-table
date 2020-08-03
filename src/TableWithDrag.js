@@ -66,8 +66,9 @@ export default class TableWithDrag extends Component {
     this.state = {
       todos: [
         {title: 'Item 1',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}, 
-        {title: 'Item 2',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}
+        {title: 'Item 2',owner: 'beyond',status: 'Urgent',dueDate: '12.08.2020',priority: 'Urgent'}
       ],
+      searchKey: '',
       showSave: false,
       addTodoValue: {
         title: '',
@@ -131,12 +132,22 @@ export default class TableWithDrag extends Component {
      }})
   }
 
- search = (nameKey, myArray) => {
-    for (var i=0; i < myArray.length; i++) {
-        if (myArray[i].name === nameKey) {
-            return myArray[i];
+  handleSearch = () => {
+   let {searchKey,todos} = this.state
+   let searchArr = []
+   if(searchKey.length > 0 ){
+    for (var i=0; i < todos.length; i++) {
+        if (todos[i].title === searchKey) {
+          searchArr.push(todos[i])
         }
     }
+    this.setState({
+      todos: searchArr
+    })
+    console.log('2223',searchArr)
+
+
+  }
 }
 
 
@@ -195,11 +206,14 @@ export default class TableWithDrag extends Component {
       <React.Fragment>
         
       <div className="row mb-50">
-         <div className="col-sm-5"></div>
-         <input type="text" placeholder="Search in Todos.."  
-         className="form-control col-sm-2"/>
+         <div className="col-sm-4"></div>
+         <input type="text" placeholder="Search in Todos with title.."  
+           onChange={(e) => this.setState({searchKey: e.target.value})}
+         className="form-control col-sm-3"/>
           &nbsp;
-         <button className="btn btn-info btn-sm col-sm-2">Search</button>
+         <button className="btn btn-info btn-sm col-sm-2" onClick={this.handleSearch}>
+            Search
+            </button>
          &nbsp;
          <button className="btn btn-warning btn-sm col-sm-2">Reset</button>
       </div>
