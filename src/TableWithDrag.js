@@ -116,6 +116,21 @@ export default class TableWithDrag extends Component {
       }})
   }
 
+  cancelTodo = () => {
+    let allTodos = this.state.todos
+    allTodos = allTodos.slice(0,this.state.todos.length - 1)
+     this.setState({
+      todos: allTodos,
+      showSave: false,
+      addTodoValue: {
+       title: '',
+       owner: '',
+       status: '',
+       dueDate: '',
+       priority: ''
+     }})
+  }
+
 
   render() {
     const {todos,showSave} = this.state;
@@ -141,7 +156,7 @@ export default class TableWithDrag extends Component {
                 </td>
                 <td>
                 <select className="custom-select" name="status" value="" onChange={this.handleAddTodoValue}>
-                    <option value="">Choose status...</option>
+                    <option value="">Choose status</option>
                     <option value="Pending">Pending</option>
                     <option value="Donw">Done</option>
                     <option value="In Progress">In Progress</option>
@@ -157,7 +172,7 @@ export default class TableWithDrag extends Component {
                 </td>
                 <td>
                   <select className="custom-select" name="priority" value="" onChange={this.handleAddTodoValue}>
-                    <option value="">Choose priority...</option>
+                    <option value="">Choose priority</option>
                     <option value="Urgent">Urgent</option>
                     <option value="High">High</option>
                     <option value="Low">Low</option>
@@ -186,13 +201,22 @@ export default class TableWithDrag extends Component {
               />            
         ))}
       </SortableContainer>
+      {!showSave && 
       <button className="btn btn-info btn-sm" onClick={this.addTodo}>+ Add new </button>
-        &nbsp;
+      }
+        &nbsp;&nbsp;
       {showSave && 
         <button type="button" className="btn btn-outline-secondary btn-sm" 
           onClick={this.saveTodo}>
             Save
-            </button>
+        </button>
+       }
+       &nbsp;&nbsp;
+       {showSave && 
+        <button type="button" className="btn btn-outline-secondary btn-sm" 
+          onClick={this.cancelTodo}>
+            Cancel
+        </button>
        } 
       </React.Fragment>
 
