@@ -62,10 +62,20 @@ const AddTodoForm = sortableElement(({title,owner,status,dueDate,priority}) => (
   <React.Fragment>
     <tr>
       <td> 
-         <input className="form-control" type="text" placeholder="things to do"/>
+         <input 
+            onChange={this.handleAddTodoValue} 
+            name="title"
+            className="form-control" 
+            type="text" 
+            placeholder="things to do"/>
         </td>
         <td>
-        <input className="form-control" type="text" placeholder="owner" />
+         <input 
+           onChange={this.handleAddTodoValue} 
+           name="owner"
+           className="form-control" 
+           type="text" 
+           placeholder="owner" />
         </td>
         <td>
         <select class="custom-select" id="inputGroupSelect01">
@@ -76,10 +86,20 @@ const AddTodoForm = sortableElement(({title,owner,status,dueDate,priority}) => (
           </select>
         </td>
         <td>
-        <input className="form-control" type="text" placeholder="Due Date" />
+        <input 
+           onChange={this.handleAddTodoValue} 
+           name="dueDate" 
+           className="form-control" 
+           type="text" 
+           placeholder="Due Date" />
         </td>
         <td>
-        <input className="form-control" type="text" placeholder="Priority" />
+        <input 
+          onChange={this.handleAddTodoValue} 
+          name="priority"
+          className="form-control" 
+          type="text" 
+          placeholder="Priority" />
         </td>
     </tr>
   </React.Fragment>
@@ -93,7 +113,14 @@ export default class TableWithDrag extends Component {
         {title: 'Item 1',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}, 
         {title: 'Item 2',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'}
       ],
-      showSave: false
+      showSave: false,
+      addTodoValue: {
+        title: '',
+        owner: '',
+        status: '',
+        dueDate: '',
+        priority: ''
+      }
     }
   }
 
@@ -109,11 +136,28 @@ export default class TableWithDrag extends Component {
      this.setState({todos: allTodos,showSave: true})
   }
 
+  handleAddTodoValue = (e) => {
+    let name = e.target.name
+    let value = e.target.value
+    let addTodoValueNew = this.state.addTodoValue
+    addTodoValueNew[`${name}`] =  value
+    this.setState({addTodoValue: addTodoValueNew  })
+  }
+
   saveTodo = () => {
     let allTodos = this.state.todos
      allTodos = allTodos.slice(0,this.state.todos.length - 1)
      allTodos.push({title: 'Item 20',owner: 'anonyomous',status: 'Pending',dueDate: '12.08.2020',priority: 'Urgent'})
-     this.setState({todos: allTodos,showSave: false})
+     this.setState({
+       todos: allTodos,
+       showSave: false,
+       addTodoValue: {
+        title: '',
+        owner: '',
+        status: '',
+        dueDate: '',
+        priority: ''
+      }})
   }
 
   render() {
